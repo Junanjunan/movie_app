@@ -13,10 +13,13 @@
             설치 확인: (콘솔) git --version
             설치 안되어있으면 git 설치 (github 아니라 git)
 
+
 # 0.2 Theory Requirements
     preparations: HTML, CSS, JS, node.js(package.json)
 
+
 # 0.3 Why React
+
 
 # 1.0 Creating your first React App
     create-react-app
@@ -63,6 +66,7 @@
             -> 나는 movie_app의 상위폴더인 reactjs에서 npm start를 했음
             -> movie_app을 시작경로로 해서 npm start
 
+
 # 1.1 Creating a github Respository
     (콘솔) git init
     
@@ -76,3 +80,125 @@
 
     (콘솔) git add . (git add everything)
     (콘솔) git commit -m "#1.0 Creating your first React App"
+    (콘솔) git push origin master
+
+
+# 1.2 How does React work?
+    기본적인 것만 가지고 설명할 것이기 때문에 몇가지는 삭제
+
+    (src/index.js)
+        기본적으로 아래와 같이 되어 있음
+
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import './index.css';
+        import App from './App';
+        import reportWebVitals from './reportWebVitals';
+
+        ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+        );
+
+        // If you want to start measuring performance in your app, pass a function
+        // to log results (for example: reportWebVitals(console.log))
+        // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+        reportWebVitals();
+
+        여기서 몇가지 지우고 아래와 같이 남긴다
+
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import App from './App';
+
+        ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+        );
+    
+    (src)
+        logo.svg 삭제
+        serviceWorker.js 삭제 (난 처음부터 없음)
+        index.css 삭제
+        App.test.js 삭제
+        App.css 삭제
+        최종적으로 index.js, App.js만 남기면 된다고 함(나는 우선 언급안되고 남아있는 것들 삭제 안하고 남겨둠)
+
+    (src/App.js)
+        import logo from './logo.svg'; 삭제
+        import './App.css'; 삭제
+        강에의는 import React from 'react'; 가 있는데 난 없음 -> 추가? 우선 없이 해보자
+
+        (처음)
+        import logo from './logo.svg';
+        import './App.css';
+
+        function App() {
+        return (
+            <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <p>
+                Edit <code>src/App.js</code> and save to reload.
+                </p>
+                <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                Learn React
+                </a>
+            </header>
+            </div>
+        );
+        }
+
+        export default App;
+
+        (지우고 난 후)
+        function App() {
+        return (
+            <div className="App">
+            </div>
+        );
+        }
+
+        export default App;
+
+
+    (src/App.js)
+        function App() {
+        return (
+            <div className="App">
+            Hello
+            </div>
+        );
+        }
+
+        export default App;
+        등 넣어주면 자동으로 웹에 반영
+
+    (public/index.html)
+        <div id="root"></div> 
+        
+        비어있음, 근데 web에서 f12 해서 보면 
+        <div id="root">
+            <div class="App">Hello</div>
+        </div>
+        로 되어있음
+
+        -> React의 기능임
+        (src/index.js)를 보면 알 수 있음
+            ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+            );
+
+
