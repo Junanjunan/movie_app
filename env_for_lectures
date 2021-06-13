@@ -1,0 +1,78 @@
+# 0.1 Requirements
+    preparations: node.JS, npm, npx, git
+        node.JS
+            설치 확인: 콘솔에 node-v 확인
+            설치사이트: nodejs.org
+            버전: 상관 없다 함
+        npm
+            설치 확인: node.JS 설치하고, console에 npm 입력 (node.JS 설치시 npm 자동 설치됨)
+        npx
+            npx는 별도 설치 필요
+            설치 방법: (콘솔) npm install npx -g (node.JS, npm 설치 확인 후 설치)
+        git
+            설치 확인: (콘솔) git --version
+            설치 안되어있으면 git 설치 (github 아니라 git)
+
+# 0.2 Theory Requirements
+    preparations: HTML, CSS, JS, node.js(package.json)
+
+# 0.3 Why React
+
+# 1.0 Creating your first React App
+    create-react-app
+        create-react-app 을 통해서 React Web App을 Set up 해야 편하게 React를 이용할 수 있다.
+        설치 방법: (콘솔) cd Documents (Enter) npx create-react-app 파일명 - npx create-react-app movie_app
+            (나는 Window라 그런가 cd Documents로 경로 변경이 안돼서 바로 npx create-react-app movie_app 해줌)
+    
+    READEME.md 내부 내용 삭제(나는 상위 폴더 reactjs에 복사) 후
+        React JS Fundamentals Course(2019 Update!) 입력
+    
+    package.json
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test",
+                "eject": "react-scripts eject"
+            },
+
+            에서 test, eject는 필요없으니 지운다
+
+            "scripts": {
+                "start": "react-scripts start",
+                "build": "react-scripts build",
+            },
+    
+    yarn.lock
+        기본적으로 설치할때 따라오는데, 필요 없으니 삭제
+    
+    개발 시작
+        npm start
+            나는 npm start 했떠니 아래와 같은 오류 발생
+                C:\Users\User\Desktop\reactjs>npm start
+                npm ERR! code ENOENT
+                npm ERR! syscall open
+                npm ERR! path C:\Users\User\Desktop\reactjs\package.json
+                npm ERR! errno -4058
+                npm ERR! enoent ENOENT: no such file or directory, open 'C:\Users\User\Desktop\reactjs\package.json'
+                npm ERR! enoent This is related to npm not being able to find a file.
+                npm ERR! enoent
+
+                npm ERR! A complete log of this run can be found in:
+                npm ERR!     C:\Users\User\AppData\Roaming\npm-cache\_logs\2021-06-13T05_42_43_603Z-debug.log
+            -> 실제 파일이 있는 경로에서 npm start를 해줘야 한다고 함
+            -> 나는 movie_app의 상위폴더인 reactjs에서 npm start를 했음
+            -> movie_app을 시작경로로 해서 npm start
+
+# 1.1 Creating a github Respository
+    (콘솔) git init
+    
+    github 사이트 가서 respository 생성
+        package.json에 있는 name과 되도록 동일하게 respository 생성
+        public
+        READEME 등 선택사항 건들지 말기
+        주어지는 주소 복사: https://github.com/Junanjunan/movie_app.git
+
+    (콘솔) git remote add origin https://github.com/Junanjunan/movie_app.git
+
+    (콘솔) git add . (git add everything)
+    (콘솔) git commit -m "#1.0 Creating your first React App"
