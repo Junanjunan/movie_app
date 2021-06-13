@@ -202,3 +202,144 @@
             );
 
 
+# 2.0 JSX & PROPS
+    (src/index.js)를 보면 알 수 있음
+        ReactDOM.render(
+        <React.StrictMode>
+            <App />                         # <App />: component라 한다. 
+        </React.StrictMode>,
+        document.getElementById('root')
+        );
+
+    component: HTML을 반환하는 함수
+        위에서 <App />을 App 같은 형태로 사용 할 수 없다
+        -> <App /> 같이 javascript와 HTML 사이의 이러한 조합을 JSX 라고 한다. (react에서 나온 react에 특화된 개념)
+
+    component를 만드는 방법 실습
+        
+        (src/Potato.js)
+            import React from "react";   # component를 작성할 때마다 호출해줘야 함 : 이것을 하지 않으면 react가 이곳에 jsx가 있는 component를 사용하는 것을 이해하지 못함
+
+            function Potato() {          # Potato(): 대문자로 시작해야 함
+                return <h3>I love potato</h3>;
+            }
+
+            export default Potato;
+        
+        (src/index.js) 에 추가해서
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            import App from './App';
+
+            ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+            );
+
+            아래와 같이 하면 오류가 난다고 했는데, 이제 버전이 바껴서 아래와 같이 해도 오류 안나고 실행 됨
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            import App from './App';
+            import Potato from "./Potato";
+
+            ReactDOM.render(
+            <React.StrictMode>
+                <App /><Potato />
+            </React.StrictMode>,
+            document.getElementById('root')
+            );
+            
+            -> react application이 하나의 component만을 rendering 해야하기 때문.(여기서 그 하나의 component가 App)
+            -> Potato component를 옮기자
+
+        * 예전 버전에서는 위 방법 안됐지만, 지금은 된다. 위 방법이 더 간결한 듯
+        (src/index.js)
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            import App from './App';
+
+            ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+            );
+        
+        (src/App.js)
+            import Potato from './Potato';
+
+            function App() {
+            return (
+                <div className="App">
+                    <h1>Hello</h1>
+                    <Potato />
+                </div>
+            );
+            }
+
+            export default App;
+
+
+# 2.1 Reusable Components with JSX+Props
+    file 간의 혼란을 피하기 위해 Potato.js file을 지우자
+    JSX에서 두번째로 이해해야 하는 것: component에 정보를 보낼 수 있다는 것
+    react가 멋진 이유는 재사용 가능한 component를 만들 수 있다는 점(반복 사용 가능)
+
+    component가 정보를 어떻게 전달하는지 보자
+    (src/Food.js)
+        import React from "react";
+
+        function Food(props) {
+            console.log(props);
+            return (
+                <h1>I like food</h1>
+            );
+        }
+
+        export default Food;
+
+    (src/index.js)
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import App from './App';
+        import Potato from './Potato';
+        import Food from './Food';
+
+        ReactDOM.render(
+        <React.StrictMode>
+            <App /><Potato /><Food fav="kimchi"/>
+        </React.StrictMode>,
+        document.getElementById('root')
+        );
+
+        fav를 props라 한다.
+        위와 같이 하고 웹에서 console을 보면 Object로 fav: "kimchi"가 있는 것을 볼 수 있다
+        이 Object는 component로 전달 된 모든 props(정보)들이다.
+    
+    (src/Food.js)
+        import React from "react";
+
+        function Food(props) {
+            console.log(props.fav);
+            return (
+                <h1>I like {props.fav}</h1>
+            );
+        }
+
+        export default Food;
+
+    또는
+    (src/Food.js)
+        import React from "react";
+
+        function Food({fav}) {
+            console.log(fav);
+            return (
+                <h1>I like {fav}</h1>
+            );
+        }
+
+        export default Food;
+    위와 같이 해서 중복적으로 component를 props와 함께 사용
